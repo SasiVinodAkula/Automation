@@ -1,0 +1,8 @@
+INFO    2023-10-06 21:06:26,204 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Inside Login Test
+INFO    2023-10-06 21:06:26,208 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Config properties file loaded
+INFO    2023-10-06 21:06:26,211 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Inside Login Test
+INFO    2023-10-06 21:06:26,212 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Config properties file loaded
+INFO    2023-10-06 21:06:29,013 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Driver Initialized !!!
+INFO    2023-10-06 21:06:29,013 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Driver Initialized !!!
+INFO    2023-10-06 21:06:34,199 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Test Execution Completed !!!
+INFO    2023-10-06 21:06:34,199 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Test Execution Completed !!!

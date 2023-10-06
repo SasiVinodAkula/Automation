@@ -1,0 +1,1 @@
+java -jar selenium-server-4.12.0.jar standalone -role hub -hubConfig hub.json

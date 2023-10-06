@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" thread-count="5" parallel="classes">
+
+	<listeners>
+
+		<listener
+			class-name="com.projectName.companyName.ExtentListeners.ExtentListeners"></listener>
+<listener
+			class-name="com.projectName.companyName.helper.listener.RetryListener"></listener>
+	</listeners>
+
+
+	<test name="Test1">
+		<classes>
+			<class
+				name="com.projectName.companyName.testcases.ActiveMembersLoginTest" />
+				<class
+				name="com.projectName.companyName.testcases.ActiveMembersLoginTest7" />
+				
+			
+		</classes>
+	</test> <!-- Test -->
+
+
+
+</suite> <!-- Suite -->
