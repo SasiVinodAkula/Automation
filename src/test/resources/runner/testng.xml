@@ -14,9 +14,9 @@
 	<test name="Test1">
 		<classes>
 			<class
-				name="com.projectName.companyName.testcases.ActiveMembersLoginTest" />
-				<class
-				name="com.projectName.companyName.testcases.ActiveMembersLoginTest7" />
+				name="com.projectName.companyName.testcases.SearchGoogle" />
+			<class
+				name="com.projectName.companyName.testcases.SearchGoogle2" />
 				
 			
 		</classes>

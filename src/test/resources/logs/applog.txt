@@ -1,8 +1,10 @@
-INFO    2023-10-06 21:06:26,204 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Inside Login Test
-INFO    2023-10-06 21:06:26,208 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Config properties file loaded
-INFO    2023-10-06 21:06:26,211 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Inside Login Test
-INFO    2023-10-06 21:06:26,212 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Config properties file loaded
-INFO    2023-10-06 21:06:29,013 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Driver Initialized !!!
-INFO    2023-10-06 21:06:29,013 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Driver Initialized !!!
-INFO    2023-10-06 21:06:34,199 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Test Execution Completed !!!
-INFO    2023-10-06 21:06:34,199 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Test Execution Completed !!!
+INFO    2023-10-31 16:13:27,818 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Inside Login Test
+INFO    2023-10-31 16:13:27,823 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Inside Login Test
+INFO    2023-10-31 16:13:27,824 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Config properties file loaded
+INFO    2023-10-31 16:13:27,824 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Config properties file loaded
+INFO    2023-10-31 16:13:30,617 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Driver Initialized !!!
+INFO    2023-10-31 16:13:30,617 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Driver Initialized !!!
+INFO    2023-10-31 16:13:33,177 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Typing in : Search Field entered the value as : Selenium Automation demo 1
+INFO    2023-10-31 16:13:33,323 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Typing in : Search Field entered the value as : Selenium Automation demo 2
+INFO    2023-10-31 16:13:38,644 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Test Execution Completed !!!
+INFO    2023-10-31 16:13:39,116 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Test Execution Completed !!!

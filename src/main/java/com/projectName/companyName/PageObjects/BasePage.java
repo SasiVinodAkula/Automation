@@ -44,6 +44,8 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.projectName.companyName.ExtentListeners.ExtentListeners;
 import com.projectName.companyName.ExtentListeners.ExtentManager;
 import com.projectName.companyName.utilities.DriverManager;
+import com.projectName.companyName.utilities.JavaScript;
+
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
@@ -56,17 +58,15 @@ public abstract class BasePage<T> {
 	private long LOAD_TIMEOUT = 10;
 	private int AJAX_ELEMENT_TIMEOUT = 10;
 	public int expTime = 60;
-	protected JavascriptExecutor exe;
-	protected Robot robot;
+	private JavascriptExecutor exe;	
 	protected WebDriverWait wait;
-	protected Capabilities caps;
+	
 
 	
 	
 	public BasePage() {
-		this.driver = DriverManager.getDriver();
-	//	this.caps = DriverCapabilities.getCapabilities();
-		//this.exe = JavaScript.getJavaScriptObject();
+		this.driver = DriverManager.getDriver();	
+		this.exe = JavaScript.getJavaScriptObject();
 		//this.robot = RobotClass.getRobotClassObject();
 //		this.wait = waitHelper.getWebDriverWaitObject();
 		
@@ -120,86 +120,93 @@ public abstract class BasePage<T> {
 			e.printStackTrace();
 		}
 	}
+	
+	private Actions createAction() {
+		Actions actions = new Actions(DriverManager.getDriver());
+		return actions;
+	}
 
 	public void moveToElement(WebElement element) {
-		Actions actions = new Actions(DriverManager.getDriver());
-		actions.moveToElement(element).perform();
+		createAction().moveToElement(element).perform();
 	}
 	
 	public void rightClick(WebElement element) {
-		Actions actions = new Actions(DriverManager.getDriver());
-		actions.contextClick(element).perform();
+		createAction().contextClick(element).perform();
 	}
 	
 	public void sendKeysAction(WebElement element, String string) {
-		Actions actions = new Actions(DriverManager.getDriver());
-		actions.sendKeys(element,string).perform();
+		createAction().sendKeys(element,string).perform();
 	}
 	
 	
 
-	public void click(WebElement element, String elementName) {
+	public void doClick(WebElement element, String elementName) {
 
-		ExtentListeners.testReport.get().info("Clicking on : " + elementName);
-		log.info("Clicking on : " + elementName);
-		highlightElement(element);
-		element.click();
+		try {
+			ExtentListeners.testReport.get().info("Clicking on : " + elementName);
+			log.info("Clicking on : " + elementName);
+			highlightElement(element);
+			element.click();
+		} catch (Exception e) {
+			ExtentListeners.testReport.get().fail(e.getMessage());
+		}
+		
 	}
 
-	public void type(WebElement element, String value, String elementName) {
+	public void doEnterText(WebElement element, String value, String elementName) {
 		
 		try {
 			log.info("Typing in : " + elementName + " entered the value as : " + value);
-			ExtentListeners.testReport.get().info("Typing in : " + elementName + " entered the value as : " + value);
+			ExtentListeners.testReport.get().info("entering in : " + elementName + " the value as : " + value);
 			element.clear();
 			highlightElement(element);
 			element.sendKeys(value);
 		} catch (Throwable e) {
-			ExtentListeners.testReport.get().info(e+": "+elementName +" not found");
-			Assert.fail();
+			
+			ExtentListeners.testReport.get().fail(e.getMessage());
+			
 			
 		}
 		
 	}
 
-	
+	private Select createSelect(WebElement element) {
+		Select select = new Select(element);
+		
+		return select;
+	}
 	
 	
 	public void selectUsingVisibleText(WebElement element, String visibleText, String elementName) {
 		log.info("Selecting the +" + elementName + "+ value as : " + visibleText);
 		ExtentListeners.testReport.get().info("Selecting the " + elementName + " value as : " + visibleText);
-		Select sel = new Select(element);
+		
 		highlightElement(element);
-		sel.selectByVisibleText(visibleText);
+		createSelect(element).selectByVisibleText(visibleText);
 	}	
 	public void selectUsingIndex(WebElement element, int index){
-		Select select = new Select(element);
 		log.info("selectUsingIndex and index is: "+index);
-		select.selectByIndex(index);
+		createSelect(element).selectByIndex(index);
 	}	
-	public void selectUsingValue(WebElement element, String value){
-		Select select = new Select(element);
+	public void selectUsingValue(WebElement element, String value){		
 		log.info("selectUsingValue and value is: "+value);
-		select.selectByValue(value);
+		createSelect(element).selectByValue(value);
 	}	
 	public void deSelectUsingValue(WebElement element, String value){
-		Select select = new Select(element);
 		log.info("deSelectUsingValue and value is: "+value);
-		select.deselectByValue(value);
+		createSelect(element).deselectByValue(value);
 	}	
-	public void deSelectUsingIndex(WebElement element, int index){
-		Select select = new Select(element);
+	public void deSelectUsingIndex(WebElement element, int index){		
 		log.info("deSelectUsingIndex and index is: "+index);
-		select.deselectByIndex(index);
+		createSelect(element).deselectByIndex(index);
 	}	
 	public void deSelectUsingVisibleText(WebElement element, String visibleText){
-		Select select = new Select(element);
 		log.info("deselectByVisibleText and visibleText is: "+visibleText);
-		select.deselectByVisibleText(visibleText);
+		createSelect(element).deselectByVisibleText(visibleText);
 	}	
 	public List<String> getAllDropDownData(WebElement element){
-		Select select = new Select(element);
-		List<WebElement> elementList = select.getOptions();
+		
+		List<WebElement> elementList = createSelect(element).getOptions();
 		List<String> valueList = new LinkedList<String>();
 		for(WebElement ele: elementList){
 			log.info(ele.getText());
@@ -317,57 +324,63 @@ public abstract class BasePage<T> {
 	}
 	
 	
+	private Date createDate() {
+		Date date = new Date();
+		return date;
+	}
+	
+	
 //	https://compiler.javatpoint.com/opr/test.jsp?filename=DateToStringExample2
 	public String currentTime() {
 		DateFormat dateFormat = new SimpleDateFormat("MMddHHmmss");
-		Date date = new Date();
+		
 		// System.out.println(date)); //0809190355
-		String d = dateFormat.format(date);
+		String d = dateFormat.format(createDate());
 		return d;
 	}	
 	public String getSystemCurrentYear() {
-		Date date = new Date();  
+		  
 	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy");  
-	    String strDate = formatter.format(date);  
+	    String strDate = formatter.format(createDate());  
 	    return strDate;
 	}
 	public String getSystemCurrentMonth() {
-		Date date = new Date();  
+		
 	    SimpleDateFormat formatter = new SimpleDateFormat("M");  
-	    String strDate = formatter.format(date);  
+	    String strDate = formatter.format(createDate());  
 	    return strDate;
 	}	
 	public String getSystemCurrentDate() {
-		Date date = new Date();  
+		 
 	    SimpleDateFormat formatter = new SimpleDateFormat("dd");  
-	    String strDate = formatter.format(date);  
+	    String strDate = formatter.format(createDate());  
 	    return strDate;
 	}	
 	public String getSystemCurrentHourIn12Hour() {		 
-		Date date = new Date();
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("hh");
-		String strDate = formatter.format(date);  
+		String strDate = formatter.format(createDate());  
 	    System.out.println("Date Format with dd-M-yyyy hh:mm:ss : "+strDate);	    
 		return strDate;
 	}	
 	public String getSystemCurrentMintues() {		 
-		Date date = new Date();
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("mm");
-		String strDate = formatter.format(date);  
+		String strDate = formatter.format(createDate());  
 	    System.out.println("Date Format with dd-M-yyyy hh:mm:ss : "+strDate);
 		return strDate;
 	}	
 	public String getAmPm() {
 		 
-		Date date = new Date();
-		String dateToStr = DateFormat.getTimeInstance().format(date);  
+		
+		String dateToStr = DateFormat.getTimeInstance().format(createDate());  
         System.out.println("Date Format using getTimeInstance(): "+dateToStr);        
 	    return dateToStr;
 	}	 	
 	public String date() {
-		Date date = new Date();  
+		  
 	    SimpleDateFormat formatter=new SimpleDateFormat("dd MMMM yyyy");  
-	    String strDate = formatter.format(date);    
+	    String strDate = formatter.format(createDate());    
 	    System.out.println("Date Format with dd MMMM yyyy : "+strDate);
 	    return strDate;
 	}
@@ -463,12 +476,12 @@ public abstract class BasePage<T> {
 		}
 		catch(Exception e){
 			log.error("element is not Displayed..", e.getCause());
-			aShot();
-			ExtentListeners.testReport.get().info("element is not Displayed.."+e.getMessage());			
+			
+			ExtentListeners.testReport.get().fail("element is not Displayed.."+e.getMessage());			
 			return false;
 		}
 	}	
-	public boolean isNotDisplayed(WebElement element){
+	public boolean isDisplayed(WebElement element){
 		try{
 			element.isDisplayed();
 			log.info("element is present.."+element.getText());
@@ -476,6 +489,7 @@ public abstract class BasePage<T> {
 			return false;
 		}
 		catch(Exception e){
+			ExtentListeners.testReport.get().fail("element is present.."+element.getText());
 			log.error("element is not present..");
 			return true;
 		}
@@ -625,7 +639,7 @@ public abstract class BasePage<T> {
 	 * @param element 
 	 */
 	public void highlightElement(WebElement element) {
-		exe.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
+		exe.executeScript("arguments[0].setAttribute('style', 'background: white; border: 2px solid red;');", element);
 	}
 	/**
 	 * This method will scroll till element
@@ -793,6 +807,7 @@ public abstract class BasePage<T> {
 	 * switched to main window
 	 */
 	public void closeAllTabsAndSwitchToMainWindow() {
+		switchToParentWindow();
 		Set<String> windows = DriverManager.getDriver().getWindowHandles();
 		String mainwindow = DriverManager.getDriver().getWindowHandle();
 
@@ -823,10 +838,7 @@ public abstract class BasePage<T> {
 	
 	
 	public void getBrowserInstance() {
-		String browserName = caps.getBrowserName();
-		String browserVersion = caps.getBrowserVersion();
-		System.out.println(browserName);
-		System.out.println(browserVersion);
+		
 
 		// Get OS name.
 		String os = System.getProperty("os.name").toLowerCase();

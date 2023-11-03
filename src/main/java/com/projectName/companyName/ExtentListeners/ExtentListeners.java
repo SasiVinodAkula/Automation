@@ -31,7 +31,7 @@ public class ExtentListeners implements ITestListener {
 	public void onTestStart(ITestResult result) {
 
 	
-		ExtentTest test = extent.createTest(result.getTestClass().getName()+"     @TestCase : "+result.getMethod().getMethodName());
+		ExtentTest test = extent.createTest("@TestCase : "+result.getMethod().getMethodName().toUpperCase());
         testReport.set(test);
         
 
@@ -41,6 +41,8 @@ public class ExtentListeners implements ITestListener {
 
 		
 		String methodName=result.getMethod().getMethodName();
+		
+		
 		String logText="<b>"+"TEST CASE:- "+ methodName.toUpperCase()+ " PASSED"+"</b>";		
 		Markup m=MarkupHelper.createLabel(logText, ExtentColor.GREEN);
 		testReport.get().pass(m);

@@ -1,148 +1,77 @@
 package com.projectName.companyName.PageObjects;
 
+import com.projectName.companyName.ExtentListeners.ExtentListeners;
+import com.projectName.companyName.utilities.DriverManager;
+
+import net.bytebuddy.asm.Advice.Enter;
+
+import java.awt.event.KeyEvent;
+
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
-public class LoginPage extends BasePage{
-	
-	
-	
-	@Override
-	protected ExpectedCondition getPageLoadCondition() {	
-	 
-		return ExpectedConditions.visibilityOf(LoginBtn);
-	}
+public class LoginPage extends BasePage {
 
-	@Override
-	protected  void getPageScreenSot() {
-		
-
-		aShot();
-
-	}
-	@FindBy(xpath = "//*[@id='header']")
-	WebElement pageheader;
-	
-	@FindBy(xpath = "//*[@name='Email']")
-	WebElement emailAddress;
-
-	@FindBy(xpath = "//input[@name='Password']")
+	@FindBy(xpath = "//input[@name='username']")
+	WebElement userName;
+	@FindBy(xpath = "//input[@name='password']")
 	WebElement password;
-
-	@FindBy(xpath = "//button[contains(.,'Login')]")
-	WebElement LoginBtn;
-
-	@FindBy(xpath = "//li[contains(text(),'Invalid login credentials. Please try again')]")
-	WebElement Invalidlogin;
+	@FindBy(xpath = "//input[@type='submit']")
+	WebElement login;
 
 	
-	@FindBy(xpath = "//div[@class='col-xs-12 text-right']//button[@type='submit']")
-	WebElement submitBtn;
-
-	@FindBy(xpath = "//div[@class='toast-message']")
-	WebElement toastMessage;
-
-	@FindBy(xpath = "//a[@class='forgot-password']")
-	WebElement forgotPassword;
-
 	
-	public void login(String enterEmailAddress, String password) {
-		type(this.emailAddress, enterEmailAddress, "email address");
-		type(this.password, password, "password");
-		click(LoginBtn, "Login");
+	@FindBy(xpath = "//*[@name='q']")
+	WebElement search;
+
+	@Override
+	protected void getPageScreenSot() {
+		picture();
+//		newPageScreenShot();
+	}
+
+	@Override
+	protected ExpectedCondition getPageLoadCondition() {
+
+		return ExpectedConditions.visibilityOf(login);
 	}
 
 	
-	public LoginPage emailVerificationPending(String enterEmailAddress, String password) {
-		login(enterEmailAddress, password);		
-		return this;
+	
+	
+	
+	public LoginPage open(String url) throws Exception {
+
+		DriverManager.getDriver().navigate().to(url);
+		ExtentListeners.testReport.get().info("<b>" + "<font color=" + "Green>" + "Application Opened" + "</font>" + "</b>");
+
+		return (LoginPage) openPage(LoginPage.class);
 	}
+
 	
-	
-	
-	public LoginPage waitingForApproval(String enterEmailAddress, String password) {
-		login(enterEmailAddress, password);	
+	public void searchKword(String value) throws Exception {
+
+		doEnterText(search, value,"Search Field");
+		Actions action = new Actions(driver);
+		action.sendKeys(Keys.ENTER).build().perform();
 		
-//		Your organization license is pending for approval. Please contact administrator.
-		
-		return this;
-	}
-	
-	
-	
-	
 
+		}
 
-	public LoginPage InvalidloginToApplication(String EmailAddress, String password) {
+	public HomePage loginToApplication(String uName, String pwd) throws Exception {
 
-		this.login(EmailAddress, password);
-		waitForElementToPresent(Invalidlogin);
-		Invalidlogin.isDisplayed();		
-		return this;
-	}
-	
-	public LoginPage validloginToApplication(String EmailAddress, String password) {
+		doEnterText(userName, uName,"User Name Field");
+		doEnterText(password, pwd,"Password Field");
+		doClick(login, "Login Button");
+		return (HomePage) openPage(HomePage.class);
 
-		this.login(EmailAddress, password);
-		return this;
-	}
+		}
 
-
-	
-	
-
-	public void accountLocked(String EmailAddress, String password) throws Exception {
-		
-		this.login(EmailAddress, password);
-		waitForElementToPresent(Invalidlogin);
-		
-		Thread.sleep(3000);
-		emailAddress.clear();
-		this.password.clear();
-		this.login(EmailAddress, password);
-		waitForElementToPresent(Invalidlogin);
-		
-		Thread.sleep(3000);
-		emailAddress.clear();
-		this.password.clear();
-		this.login(EmailAddress, password);		
-	}
-
-	
 }
 
-
-	
-//	public boolean verifySuccessLoginMsg() {
-//		return new VerificationHelper(driver).isDisplayed(usertext);
-//	}
-
-//	public boolean verifyInvalidlogin() {
-//		return new VerificationHelper(driver).isDisplayed(Invalidlogin);
-//	}
-//
-//	public boolean LoginPagedisplayed() {
-//		return new VerificationHelper(driver).isDisplayed(LoginBtn);
-//	}
-//	
-
-
-	
-	
-	
-	
-	
-
-	
-//	public ZohoCRMPage gotoCRM() {
-//		
-//		click(crm,"CRM Link");
-//		return () openPage(.class);
-//	}
-//	
-//	return (ZohoCRMPage) openPage(ZohoCRMPage.class);
-	
-	
 

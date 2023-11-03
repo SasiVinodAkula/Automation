@@ -46,6 +46,7 @@ public class ExtentManager {
 	        extent.setSystemInfo("Automation Tester", "Sasi Vinod Akula");
 	        extent.setSystemInfo("Organization", "Self");
 	        extent.setSystemInfo("Release:", "3");
+	        extent.setSystemInfo("Environment","SIT");
 	        
 	        
 	        return extent;

@@ -1,123 +1,74 @@
 package com.projectName.companyName.PageObjects;
 
+import com.projectName.companyName.ExtentListeners.ExtentListeners;
 import com.projectName.companyName.utilities.DriverManager;
 
+import net.bytebuddy.asm.Advice.Enter;
+
+import java.awt.event.KeyEvent;
+
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-
-
-
+import org.openqa.selenium.support.ui.Select;
 
 public class HomePage extends BasePage {
 
-	@FindBy(xpath = "//*[contains(text(),'Buy it now')]")
-	WebElement buyItNow;
-
-//	
-	
-	@FindBy(xpath = "//*[contains(text(),'Click here')]")
-	WebElement clickHere;
-	@FindBy(xpath = "//a[contains(.,'Upcoming Events')]")
-	WebElement UpcomingEvents;
-
-	@FindBy(xpath = "//span[contains(.,'Events')]")
-	WebElement Events;
-
-	@FindBy(xpath = "//*[@id='navbar']//*[contains(text(),'Home')]")
-	WebElement home;
-
-	@FindBy(xpath = "//*[@id='header']")
-	WebElement pageheader;
-
-	@FindBy(xpath = "//*[@id='header']")
-	WebElement header;
-	@FindBy(xpath = "//*[@class='bx-viewport']")
-	WebElement ad;	
+	@FindBy(xpath = "//a[@title='Home']")
+	WebElement homeTab;
+	@FindBy(xpath = "//a[@title='Calendar']")
+	WebElement calendarTab;
+	@FindBy(xpath = "//a[@title='Companies']")
+	WebElement companiesTab;
+	@FindBy(xpath = "//a[@title='Contacts']")
+	WebElement contactTab;
+	@FindBy(xpath = "//a[@title='New Contact']")
+	WebElement newContact;
+	@FindBy(xpath = "//a[@title='Deals']")
+	WebElement dealsTab;
+	@FindBy(xpath = "//a[@title='Tasks']")
+	WebElement tasksTab;
 	
 	
+	@FindBy(xpath = "//*[@name='q']")
+	WebElement search;
+
 	@Override
-	protected  void getPageScreenSot() {
-	
-		
-		
-		
-		
+	protected void getPageScreenSot() {
+		picture();
+//		newPageScreenShot();
 	}
-	
 
 	@Override
 	protected ExpectedCondition getPageLoadCondition() {
-		
-		return ExpectedConditions.visibilityOf(buyItNow);
+
+		return ExpectedConditions.visibilityOf(homeTab);
 	}
 
 	
-	public HomePage open(String url) {
+	
+	
+	
+	public ContactsPage navigateToContactsPage()  {
 
-		DriverManager.getDriver().navigate().to(url);
+		doClick(contactTab, "contact Tab");
 		
-		return (HomePage) openPage(HomePage.class);
+
+		return (ContactsPage) openPage(ContactsPage.class);
+	}
+
+	public ContactsPage addNewContact()  {
+
+		
+		moveToElement(contactTab);
+		doClick(newContact, "New contact");
+		return (ContactsPage) openPage(ContactsPage.class);
 	}
 	
-
-public void getCred(String getDefaultUserName,String getDefaultPassword) {
-	
-	System.out.println(getDefaultUserName);
-	System.out.println(getDefaultPassword);
-	
-//	buyItNow.click();
-	
-	
-	
+//setTimeout(function(){debugger;}, 5000)
 }
 
-	
-	public checkOutPage bookItNow(String getDefaultUserName,String getDefaultPassword) {
-		
-		System.out.println(getDefaultUserName);
-		System.out.println(getDefaultPassword);
-		
-//		buyItNow.click();
-		
-		
-		return (checkOutPage) openPage(checkOutPage.class);
-	}
-	
-}
-	
-//	public LoginPage clickOnLOGINBtn() throws Exception {
-//
-//		waitForElementToPresent(LOGINBtn);
-//		Thread.sleep(1000);
-//		click(LOGINBtn, "LOGIN");
-//		return (LoginPage) openPage(LoginPage.class);
-//		// new LoginPage(driver, );
-//
-//	}
-//
-//	
-//
-//
-//
-//	public void verifyAdImage(String expectedImgFileName) throws Exception {
-//
-//		Thread.sleep(5000);
-//		scrollToElement(clickHere);
-//		takeScreenshotByShutterBug(ad, "Home Page Ad");
-//		
-//
-//	}
-//
-//	// public ZohoCRMPage gotoCRM() {
-//	//
-//	// click(crm,"CRM Link");
-//	// return () openPage(.class);
-//	// }
-//	//
-//	// return (ZohoCRMPage) openPage(ZohoCRMPage.class);
-//
-//}
+

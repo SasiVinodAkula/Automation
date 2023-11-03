@@ -14,6 +14,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 
@@ -51,49 +52,7 @@ public class BaseTest {
 	private FileInputStream fis;
 	public Logger log = Logger.getLogger(BaseTest.class);
 	public boolean grid=false;
-	private static String defaultUserName;
-	private static String defaultPassword;
-	private static String testSiteURL;
-
-	
-	public static ThreadLocal<String> url = new ThreadLocal<String>();
-	public static ThreadLocal<String> dUserName = new ThreadLocal<String>();
-	public static ThreadLocal<String> dPassword = new ThreadLocal<String>();
-	
-	
-	
-	
-	
-	public static String getTestSiteURL() {		
-		return testSiteURL = url.get();
-	}
-
-	public static void setTestSiteURL(String testSiteURL) {
-		url.set(testSiteURL);
-	}
-	
-	public static String getDefaultUserName() {		
-		return defaultUserName = dUserName.get();
-	}
-
-	public static void setDefaultUserName(String defaultUserName) {
-		dUserName.set(defaultUserName);
-	}
-	
-	
-	public static String getDefaultPassword() {		
-		return defaultPassword = dPassword.get();
-	}
-
-	public static void setDefaultPassword(String defaultPassword) {
-		dPassword.set(defaultPassword);
-	}
-	
-
-
-
-
-
+	Map<String, String> file;
 
 
 	@BeforeSuite
@@ -141,9 +100,19 @@ public class BaseTest {
 			
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
+		file = new HashMap<String, String>();
+		
+		
+		for(Entry<Object, Object> entry: Config.entrySet()) {
+			file.put((String)entry.getKey(),(String) entry.getValue());
+			
+		}
+//		System.out.println(file);
+//		System.out.println(file.get("testsiteurl"));
+
 	}
 	
 	
@@ -248,22 +217,17 @@ public void logPassed(String message) {
 		DriverManager.setWebDriver(driver);
 		log.info("Driver Initialized !!!");
 		DriverManager.getDriver().manage().window().maximize();
-		DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		setDefaultUserName(Config.getProperty("defaultUserName"));
-		setDefaultPassword(Config.getProperty("defaultPassword"));
-		setTestSiteURL(Config.getProperty("testsiteurl"));
+		
+		DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(file.get("implicit.wait"))));
+//		HashMap<String, String> file = new HashMap<String, String>();
+//		file.put("uName", Config.getProperty("defaultUserName"));
+//		System.out.println(file.get("uName"));
 		
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		JavaScript.setJavaScriptObject(js);
 //		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 //		waitHelper.setWebDriverWaitObject(wait);
-		try {
-			Robot robot = new Robot();
-			RobotClass.setRobotClassObject(robot);	
-		} catch (AWTException e) {
-
-			e.printStackTrace();
-		}
+		
 		
 		
 		

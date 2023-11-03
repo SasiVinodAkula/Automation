@@ -7,14 +7,13 @@
   </listeners>
   <test thread-count="5" parallel="classes" name="Test1(failed)">
     <classes>
-      <class name="com.projectName.companyName.testcases.ActiveMembersLoginTest7">
+      <class name="com.projectName.companyName.testcases.TC001">
         <methods>
-          <include name="mail"/>
           <include name="setUpFramework"/>
-          <include name="tearDown"/>
           <include name="loginTest" invocation-numbers="0"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- com.projectName.companyName.testcases.ActiveMembersLoginTest7 -->
+      </class> <!-- com.projectName.companyName.testcases.TC001 -->
     </classes>
   </test> <!-- Test1(failed) -->
 </suite> <!-- Failed suite [Suite] -->
