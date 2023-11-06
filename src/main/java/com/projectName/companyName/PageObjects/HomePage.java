@@ -6,7 +6,10 @@ import com.projectName.companyName.utilities.DriverManager;
 import net.bytebuddy.asm.Advice.Enter;
 
 import java.awt.event.KeyEvent;
+import java.util.Hashtable;
+import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -17,24 +20,18 @@ import org.openqa.selenium.support.ui.Select;
 
 public class HomePage extends BasePage {
 
-	@FindBy(xpath = "//a[@title='Home']")
-	WebElement homeTab;
-	@FindBy(xpath = "//a[@title='Calendar']")
-	WebElement calendarTab;
-	@FindBy(xpath = "//a[@title='Companies']")
-	WebElement companiesTab;
-	@FindBy(xpath = "//a[@title='Contacts']")
-	WebElement contactTab;
-	@FindBy(xpath = "//a[@title='New Contact']")
-	WebElement newContact;
-	@FindBy(xpath = "//a[@title='Deals']")
-	WebElement dealsTab;
-	@FindBy(xpath = "//a[@title='Tasks']")
-	WebElement tasksTab;
+	
+	@FindBy(xpath = "//span[text()='Hello, sign in']")
+	WebElement helloSignIn;
+	@FindBy(xpath = "//input[@id='twotabsearchtextbox']")
+	WebElement searchTextBox;
+	@FindBy(xpath = "//input[@id='nav-search-submit-button']")
+	WebElement searchbutton;
+	@FindBy(xpath="//span[@id='nav-cart-count']")
+	WebElement cartCount;
 	
 	
-	@FindBy(xpath = "//*[@name='q']")
-	WebElement search;
+	
 
 	@Override
 	protected void getPageScreenSot() {
@@ -45,28 +42,46 @@ public class HomePage extends BasePage {
 	@Override
 	protected ExpectedCondition getPageLoadCondition() {
 
-		return ExpectedConditions.visibilityOf(homeTab);
-	}
-
-	
-	
-	
-	
-	public ContactsPage navigateToContactsPage()  {
-
-		doClick(contactTab, "contact Tab");
 		
-
-		return (ContactsPage) openPage(ContactsPage.class);
+		return ExpectedConditions.visibilityOf(helloSignIn);
 	}
 
-	public ContactsPage addNewContact()  {
+	
+	public HomePage open(String url) throws Exception {
 
+		DriverManager.getDriver().navigate().to(url);
+		ExtentListeners.testReport.get().info("<b>" + "<font color=" + "Green>" + "Application Opened" + "</font>" + "</b>");
+
+		return (HomePage) openPage(HomePage.class);
+	}
+
+	
+	
+	
+
+	public SignInPage goToSignPage() throws Exception {
 		
-		moveToElement(contactTab);
-		doClick(newContact, "New contact");
-		return (ContactsPage) openPage(ContactsPage.class);
+		doClick(helloSignIn, "contact Tab");
+		return (SignInPage) openPage(SignInPage.class);
 	}
+
+	public SearchResultsPage searchProduct(Hashtable<String, String> data) throws Exception {
+		
+		doEnterText(searchTextBox, data.get("SearchKeyWord"), "Search Text Box");
+		doClick(searchbutton, "Search Button");
+		return (SearchResultsPage) openPage(SearchResultsPage.class);
+	}
+
+	public int getCartCount() {
+		String cv = getText(cartCount, "Total Cart");
+		ExtentListeners.testReport.get().info("Cart Value "+cv);
+		return stringToInt(cv);
+			
+	}
+	
+	
+	
+	
 	
 //setTimeout(function(){debugger;}, 5000)
 }

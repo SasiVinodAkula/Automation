@@ -13,10 +13,10 @@
 
 	<test name="Test1">
 		<classes>
+			<!--  <class
+				name="com.projectName.companyName.testcases.SearchGoogle" />-->
 			<class
-				name="com.projectName.companyName.testcases.SearchGoogle" />
-			<class
-				name="com.projectName.companyName.testcases.SearchGoogle2" />
+				name="com.projectName.companyName.testcases.TC001" />
 				
 			
 		</classes>

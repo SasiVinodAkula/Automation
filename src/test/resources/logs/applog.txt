@@ -1,10 +1,27 @@
-INFO    2023-10-31 16:13:27,818 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Inside Login Test
-INFO    2023-10-31 16:13:27,823 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Inside Login Test
-INFO    2023-10-31 16:13:27,824 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Config properties file loaded
-INFO    2023-10-31 16:13:27,824 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Config properties file loaded
-INFO    2023-10-31 16:13:30,617 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Driver Initialized !!!
-INFO    2023-10-31 16:13:30,617 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Driver Initialized !!!
-INFO    2023-10-31 16:13:33,177 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Typing in : Search Field entered the value as : Selenium Automation demo 1
-INFO    2023-10-31 16:13:33,323 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Typing in : Search Field entered the value as : Selenium Automation demo 2
-INFO    2023-10-31 16:13:38,644 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Test Execution Completed !!!
-INFO    2023-10-31 16:13:39,116 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Test Execution Completed !!!
+INFO    2023-11-05 21:02:27,024 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Inside Test
+INFO    2023-11-05 21:02:27,025 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Config properties file loaded
+INFO    2023-11-05 21:02:28,989 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Driver Initialized !!!
+INFO    2023-11-05 21:02:32,464 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicking on : contact Tab
+INFO    2023-11-05 21:02:33,177 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicked on : contact Tab
+INFO    2023-11-05 21:02:33,464 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Typing in : emailOrPhone entered the value as : 9704033377
+INFO    2023-11-05 21:02:33,843 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicking on : Continue button
+INFO    2023-11-05 21:02:34,357 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicked on : Continue button
+INFO    2023-11-05 21:02:34,357 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Typing in : password entered the value as : 9704033377x
+INFO    2023-11-05 21:02:34,600 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicking on : Sign In button
+INFO    2023-11-05 21:02:34,675 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicked on : Sign In button
+INFO    2023-11-05 21:02:36,753 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - element is Displayed..
+INFO    2023-11-05 21:02:36,790 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - element text is: 15
+INFO    2023-11-05 21:02:36,854 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Typing in : Search Text Box entered the value as : apple iphone 15
+INFO    2023-11-05 21:02:37,109 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicking on : Search Button
+INFO    2023-11-05 21:02:38,880 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicked on : Search Button
+INFO    2023-11-05 21:02:39,181 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicking on : First Search Result
+INFO    2023-11-05 21:02:39,368 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicked on : First Search Result
+INFO    2023-11-05 21:02:39,383 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - switched to : 1 window
+INFO    2023-11-05 21:02:39,407 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - switched to : 1 window
+INFO    2023-11-05 21:02:47,719 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicking on : Add to Cart
+INFO    2023-11-05 21:02:47,964 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicked on : Add to Cart
+INFO    2023-11-05 21:02:47,964 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicking on : close Side Sheet
+INFO    2023-11-05 21:02:49,435 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - Clicked on : close Side Sheet
+INFO    2023-11-05 21:02:51,479 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - element is Displayed..
+INFO    2023-11-05 21:02:51,516 [TestNG-PoolService-0] com.projectName.companyName.PageObjects.BasePage  - element text is: 16
+INFO    2023-11-05 21:02:51,959 [TestNG-PoolService-0] com.projectName.companyName.testcases.BaseTest  - Test Execution Completed !!!

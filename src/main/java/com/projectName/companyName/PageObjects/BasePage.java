@@ -1,7 +1,6 @@
 package com.projectName.companyName.PageObjects;
 
 
-import java.awt.Robot;
 
 
 
@@ -20,7 +19,6 @@ import javax.imageio.ImageIO;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.Alert;
 
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
@@ -55,9 +53,9 @@ public abstract class BasePage<T> {
 	protected WebDriver driver;
 	
 	public Logger log = Logger.getLogger(BasePage.class);
-	private long LOAD_TIMEOUT = 10;
+	private long LOAD_TIMEOUT = 5;
 	private int AJAX_ELEMENT_TIMEOUT = 10;
-	public int expTime = 60;
+	public int expTime = 10;
 	private JavascriptExecutor exe;	
 	protected WebDriverWait wait;
 	
@@ -107,6 +105,40 @@ public abstract class BasePage<T> {
 	protected abstract void getPageScreenSot();
 
 	
+	public void doClick(WebElement element, String elementName) throws Exception {
+
+		try {
+			ExtentListeners.testReport.get().info("Clicking on : " + elementName);
+			log.info("Clicking on : " + elementName);
+//			highlightElement(element);
+			element.click();
+			log.info("Clicked on : " + elementName);
+		} catch (Exception e) {
+			ExtentListeners.testReport.get().fail(e);
+			throw new Exception(e);
+		}
+		
+	}
+
+	public void doEnterText(WebElement element, String value, String elementName) throws Exception {
+		
+		try {
+			log.info("Typing in : " + elementName + " entered the value as : " + value);
+			ExtentListeners.testReport.get().info("entering in : " + elementName + " the value as : " + value);
+			element.clear();
+			highlightElement(element);
+			element.sendKeys(value);
+		} catch (Throwable e) {
+			log.info(e+"-----------");
+			ExtentListeners.testReport.get().fail(e);
+			throw new Exception(e);
+			
+			
+		}
+		
+	}
+	
+	
 	protected void waitForElementToPresent(WebElement element) {
 
 		log.info("waiting for :" + element.toString() + " for :" + expTime + " seconds");
@@ -130,45 +162,29 @@ public abstract class BasePage<T> {
 		createAction().moveToElement(element).perform();
 	}
 	
-	public void rightClick(WebElement element) {
+	public void doActionsRightClick(WebElement element) {
 		createAction().contextClick(element).perform();
 	}
 	
-	public void sendKeysAction(WebElement element, String string) {
+	public void doActionsSendKeys(WebElement element, String string) {
 		createAction().sendKeys(element,string).perform();
 	}
 	
-	
-
-	public void doClick(WebElement element, String elementName) {
-
+	public void doActionsClick(WebElement element,String elementName) throws Exception {
 		try {
 			ExtentListeners.testReport.get().info("Clicking on : " + elementName);
 			log.info("Clicking on : " + elementName);
-			highlightElement(element);
-			element.click();
+//			highlightElement(element);
+			createAction().click(element).perform();
+			log.info("Clicked on : " + elementName);
 		} catch (Exception e) {
-			ExtentListeners.testReport.get().fail(e.getMessage());
+			ExtentListeners.testReport.get().fail(e);
+			throw new Exception(e);
 		}
 		
 	}
 
-	public void doEnterText(WebElement element, String value, String elementName) {
-		
-		try {
-			log.info("Typing in : " + elementName + " entered the value as : " + value);
-			ExtentListeners.testReport.get().info("entering in : " + elementName + " the value as : " + value);
-			element.clear();
-			highlightElement(element);
-			element.sendKeys(value);
-		} catch (Throwable e) {
-			
-			ExtentListeners.testReport.get().fail(e.getMessage());
-			
-			
-		}
-		
-	}
+	
 
 	private Select createSelect(WebElement element) {
 		Select select = new Select(element);
@@ -471,7 +487,7 @@ public abstract class BasePage<T> {
 		try{
 			element.isDisplayed();
 			log.info("element is Displayed..");
-			takeScreenshotByShutterBug(element, elementName);
+//			takeScreenshotByShutterBug(element, elementName);
 			return true;
 		}
 		catch(Exception e){
@@ -515,7 +531,7 @@ public abstract class BasePage<T> {
 		}
 		boolean status = isElementDisplayed(element, elementName);
 		if(status){
-			log.info("element text is .."+element.getText());
+			log.info("element text is: "+element.getText());
 			return element.getText();
 		}
 		else{
@@ -696,6 +712,14 @@ public abstract class BasePage<T> {
 		setAttribute(element, "target", "_self");		
 		return hrefUrl;
 	}
+	
+	
+	public String getAttribute(WebElement element,String attributeName) {
+	
+		return element.getAttribute(attributeName);
+		
+	}
+	
 	/**
 	 * Update the Attribute of the element 
 	 * @param element,Attribute and value
@@ -765,7 +789,7 @@ public abstract class BasePage<T> {
 	 * 
 	 * @param element
 	 */
-	public void clickElementByJavaScript(WebElement element) {
+	public void doJSClick(WebElement element) {
 		highlightElement(element);
 		executeScript("arguments[0].click();", element);
 		try {
@@ -782,8 +806,8 @@ public abstract class BasePage<T> {
 	/**
 	 * This method will switch to parent window
 	 */
-	public void switchToParentWindow() {
-		log.info("switching to parent window...");
+	public void switchTodefault() {
+		log.info("switching to parent...");
 		DriverManager.getDriver().switchTo().defaultContent();
 	}
 	/**
@@ -807,7 +831,7 @@ public abstract class BasePage<T> {
 	 * switched to main window
 	 */
 	public void closeAllTabsAndSwitchToMainWindow() {
-		switchToParentWindow();
+		switchTodefault();
 		Set<String> windows = DriverManager.getDriver().getWindowHandles();
 		String mainwindow = DriverManager.getDriver().getWindowHandle();
 
@@ -844,5 +868,5 @@ public abstract class BasePage<T> {
 		String os = System.getProperty("os.name").toLowerCase();
 		System.out.println(os);
 	}
-
+	//setTimeout(function(){debugger;}, 5000)
 }

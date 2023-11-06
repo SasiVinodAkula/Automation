@@ -29,9 +29,9 @@ public class ExtentListeners implements ITestListener {
 	
 
 	public void onTestStart(ITestResult result) {
-
-	
-		ExtentTest test = extent.createTest("@TestCase : "+result.getMethod().getMethodName().toUpperCase());
+		String className = result.getTestClass().getName();
+		className = className.replace("com.projectName.companyName.testcases.", "");
+		ExtentTest test = extent.createTest(className+" @TestCase : "+result.getMethod().getMethodName());
         testReport.set(test);
         
 
