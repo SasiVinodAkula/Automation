@@ -21,13 +21,13 @@ public class SignInPage extends BasePage {
 
 	
 	@FindBy(xpath = "//input[@name='email']")
-	WebElement email;
+	private WebElement email;
 	@FindBy(xpath = "//input[@id='continue']")
-	WebElement next;
+	private WebElement next;
 	@FindBy(xpath = "//input[@name='password']")
-	WebElement pwd;
+	private WebElement pwd;
 	@FindBy(xpath = "//input[@id='signInSubmit']")
-	WebElement signInButton;
+	private WebElement signInButton;
 	
 	
 	

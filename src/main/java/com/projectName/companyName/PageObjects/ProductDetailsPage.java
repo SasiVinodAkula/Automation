@@ -21,13 +21,13 @@ public class ProductDetailsPage extends BasePage {
 	
 	
 	@FindBy(xpath = "//span[text()='Add to Cart']")
-	WebElement addtoCart;
+	private WebElement addtoCart;
 	
 	@FindBy(xpath = "//span[contains(text(),'Proceed to checkout')]")
-	WebElement proceedToCheckout;
+	private WebElement proceedToCheckout;
 	
 	@FindBy(xpath = "//a[@id='attach-close_sideSheet-link']")
-	WebElement close_sideSheet;
+	private WebElement close_sideSheet;
 	
 	@Override
 	protected void getPageScreenSot() {
@@ -51,7 +51,7 @@ public class ProductDetailsPage extends BasePage {
 //		doClick(addtoCart, "Add To Cart");
 		doActionsClick(addtoCart,"Add to Cart");
 		doClick(close_sideSheet, "close Side Sheet");
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 //		doActionsClick(proceedToCheckout);
 //		doClick(proceedToCheckout, "Proceed To Checkout");
 		return true;

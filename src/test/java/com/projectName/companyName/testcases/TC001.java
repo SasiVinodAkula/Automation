@@ -24,7 +24,7 @@ public class TC001 extends BaseTest {
 		
 		ExcelReader excel = new ExcelReader(Constants.SUITE1_XL_PATH);
 		
-		DataUtil.checkExecution("master", "addNewContact", data.get("Runmode"), excel);
+		DataUtil.checkExecution("master", "verifyUserAbletoAddProductToCart", data.get("Runmode"), excel);
 		log.info("Inside Test");		
 		openBrowser(data.get("browser"));	
 		HomePage homePage= new HomePage().open(file.get("testsiteurl"));
@@ -39,7 +39,7 @@ public class TC001 extends BaseTest {
 		SoftAssert st = new SoftAssert();
 		st.assertEquals(cartValue, NewCartValue);
 		st.assertAll();
-		ExtentListeners.testReport.get().pass("Cart value updated successfully after adding product to cart: "+cartValue);
+		ExtentListeners.testReport.get().info("Cart value updated successfully after adding product to cart: "+cartValue);
 		
 		
 

@@ -105,7 +105,7 @@ public abstract class BasePage<T> {
 	protected abstract void getPageScreenSot();
 
 	
-	public void doClick(WebElement element, String elementName) throws Exception {
+	protected void doClick(WebElement element, String elementName) throws Exception {
 
 		try {
 			ExtentListeners.testReport.get().info("Clicking on : " + elementName);
@@ -120,7 +120,7 @@ public abstract class BasePage<T> {
 		
 	}
 
-	public void doEnterText(WebElement element, String value, String elementName) throws Exception {
+	protected void doEnterText(WebElement element, String value, String elementName) throws Exception {
 		
 		try {
 			log.info("Typing in : " + elementName + " entered the value as : " + value);
@@ -158,15 +158,15 @@ public abstract class BasePage<T> {
 		return actions;
 	}
 
-	public void moveToElement(WebElement element) {
+	protected void moveToElement(WebElement element) {
 		createAction().moveToElement(element).perform();
 	}
 	
-	public void doActionsRightClick(WebElement element) {
+	protected void doActionsRightClick(WebElement element) {
 		createAction().contextClick(element).perform();
 	}
 	
-	public void doActionsSendKeys(WebElement element, String string) {
+	protected void doActionsSendKeys(WebElement element, String string) {
 		createAction().sendKeys(element,string).perform();
 	}
 	
@@ -655,7 +655,17 @@ public abstract class BasePage<T> {
 	 * @param element 
 	 */
 	public void highlightElement(WebElement element) {
-		exe.executeScript("arguments[0].setAttribute('style', 'background: white; border: 2px solid red;');", element);
+		exe.executeScript("arguments[0].setAttribute('style', 'background: green; border: 2px solid red;');", element);
+	try {
+		Thread.sleep(1000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	exe.executeScript("arguments[0].setAttribute('style', 'background: white; border: 2px solid red;');", element);
+	
+	
 	}
 	/**
 	 * This method will scroll till element
@@ -820,6 +830,7 @@ public abstract class BasePage<T> {
 		for (String window : windows) {
 			if (i == index) {
 				log.info("switched to : "+index + " window");
+				DriverManager.getDriver().switchTo().window(window);
 				DriverManager.getDriver().switchTo().window(window);
 			} else {
 				i++;

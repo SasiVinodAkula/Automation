@@ -19,9 +19,9 @@ import org.openqa.selenium.support.ui.Select;
 public class SearchResultsPage extends BasePage {
 
 	@FindBy(xpath = "(//*[@class='a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal']/span)/parent::a")
-	WebElement search_result;
+	private WebElement search_result;
 	@FindBy(xpath = "//span[text()='Add to Cart']")
-	WebElement addtoCart;
+	private WebElement addtoCart;
 
 	@Override
 	protected void getPageScreenSot() {
@@ -39,8 +39,10 @@ public class SearchResultsPage extends BasePage {
 
 		
 		doClick(search_result, "First Search Result");
+		Thread.sleep(5000);
+		
 		switchToWindow(1);
-		Thread.sleep(8000);
+		Thread.sleep(5000);
 
 		return (ProductDetailsPage) openPage(ProductDetailsPage.class);
 	}

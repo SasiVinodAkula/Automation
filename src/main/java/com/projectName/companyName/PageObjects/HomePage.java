@@ -22,13 +22,13 @@ public class HomePage extends BasePage {
 
 	
 	@FindBy(xpath = "//span[text()='Hello, sign in']")
-	WebElement helloSignIn;
+	private WebElement helloSignIn;
 	@FindBy(xpath = "//input[@id='twotabsearchtextbox']")
-	WebElement searchTextBox;
+	private WebElement searchTextBox;
 	@FindBy(xpath = "//input[@id='nav-search-submit-button']")
-	WebElement searchbutton;
+	private WebElement searchbutton;
 	@FindBy(xpath="//span[@id='nav-cart-count']")
-	WebElement cartCount;
+	private WebElement cartCount;
 	
 	
 	
@@ -61,7 +61,7 @@ public class HomePage extends BasePage {
 
 	public SignInPage goToSignPage() throws Exception {
 		
-		doClick(helloSignIn, "contact Tab");
+		doClick(helloSignIn, "Sign in Tab");
 		return (SignInPage) openPage(SignInPage.class);
 	}
 
